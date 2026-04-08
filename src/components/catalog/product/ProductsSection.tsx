@@ -1,5 +1,5 @@
 
-import { NOT_IMAGE } from "@/utils/constants";
+import { NOT_IMAGE, DEFAULT_CURRENCY } from "@/utils/constants";
 import Grid from "../../theme/ui/grid/Grid";
 import { baseUrl, getImageUrl } from "@/utils/constants";
 import { ProductCard } from "./ProductCard";
@@ -26,7 +26,7 @@ export function ProductsSection({ title, description, products }: ProductsSectio
           return (
             <ProductCard
               key={item.id ?? index}
-              currency="USD"
+              currency={DEFAULT_CURRENCY}
               imageUrl={imageUrl || ""}
               price={String(ProductPrice)}
               product={{

@@ -19,7 +19,7 @@ import { DeleteItemButton } from "../common/icons/cart/DeleteItemButton";
 import { EditItemQuantityButton } from "../common/icons/cart/EditItemQuantityButton";
 import { useCartDetail } from "@utils/hooks/useCartDetail";
 import Image from "next/image";
-import { NOT_IMAGE } from "@utils/constants";
+import { NOT_IMAGE, DEFAULT_CURRENCY } from "@utils/constants";
 import { isObject } from "@utils/type-guards";
 import LoadingDots from "@components/common/icons/LoadingDots";
 import { useFormStatus } from "react-dom";
@@ -189,7 +189,7 @@ export default function CartModal({
                                     <Price
                                       amount={item?.node?.price}
                                       className="flex justify-end space-y-2 text-right font-outfit text-base font-medium"
-                                      currencyCode={"USD"}
+                              currencyCode={DEFAULT_CURRENCY}
                                     />
                                     <div className="flex items-center gap-x-2">
                                       <DeleteItemButton item={item} />
@@ -225,7 +225,7 @@ export default function CartModal({
                             <Price
                               amount={(cartDetail as any)?.cart?.taxAmount}
                               className="text-right text-base font-medium text-black dark:text-white"
-                              currencyCode={"USD"}
+                              currencyCode={DEFAULT_CURRENCY}
                             />
                           </div>
                         )}
@@ -236,7 +236,7 @@ export default function CartModal({
                           <Price
                             amount={(cartDetail as any)?.cart?.grandTotal}
                             className="text-right text-base font-medium text-black dark:text-white"
-                            currencyCode={"USD"}
+                            currencyCode={DEFAULT_CURRENCY}
                           />
                         </div>
                       </div>
@@ -390,7 +390,7 @@ export default function CartModal({
                                     <Price
                                       amount={item?.node?.price}
                                       className="flex justify-end space-y-2 text-right font-outfit text-base font-medium"
-                                      currencyCode={"USD"}
+                              currencyCode={DEFAULT_CURRENCY}
                                     />
                                     <div className="flex items-center gap-x-2">
                                       <DeleteItemButton item={item} />
@@ -426,7 +426,7 @@ export default function CartModal({
                             <Price
                               amount={(cartDetail as any)?.cart?.taxAmount}
                               className="text-right text-base font-medium text-black dark:text-white"
-                              currencyCode={"USD"}
+                              currencyCode={DEFAULT_CURRENCY}
                             />
                           </div>
                         )}
@@ -437,7 +437,7 @@ export default function CartModal({
                           <Price
                             amount={(cartDetail as any)?.cart?.grandTotal}
                             className="text-right text-base font-medium text-black dark:text-white"
-                            currencyCode={"USD"}
+                            currencyCode={DEFAULT_CURRENCY}
                           />
                         </div>
 

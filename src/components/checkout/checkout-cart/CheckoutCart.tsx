@@ -1,4 +1,4 @@
-import { DEFAULT_OPTION } from "@/utils/constants";
+import { DEFAULT_OPTION, DEFAULT_CURRENCY } from "@/utils/constants";
 import { GridTileImage } from "@components/theme/ui/grid/Tile";
 import { Price } from "@components/theme/ui/Price";
 import CartItemAccordion from "./CartItemAccordian";
@@ -67,7 +67,7 @@ export default function CheckoutCart({ cartItems, selectedShippingRate: _id }: {
                             <Price
                               amount={item?.node?.price}
                               className="space-y-2 text-start font-outfit text-lg font-medium xl:text-right"
-                              currencyCode={"USD"}
+                              currencyCode={DEFAULT_CURRENCY}
                             />
                           </div>
                         </div>
@@ -76,7 +76,7 @@ export default function CheckoutCart({ cartItems, selectedShippingRate: _id }: {
                         <Price
                           amount={item?.node?.price}
                           className="space-y-2 text-start font-outfit text-lg font-medium xl:text-right"
-                          currencyCode={"USD"}
+                          currencyCode={DEFAULT_CURRENCY}
                         />
                       </div>
                     </div>
@@ -93,7 +93,7 @@ export default function CheckoutCart({ cartItems, selectedShippingRate: _id }: {
             <Price
               amount={cartItems?.subtotal || "0"}
               className="text-right text-base text-black dark:text-white"
-              currencyCode={"USD"}
+              currencyCode={DEFAULT_CURRENCY}
             />
           </div>
           <div className="mb-3 flex items-center justify-between pb-1 pt-1">
@@ -105,7 +105,7 @@ export default function CheckoutCart({ cartItems, selectedShippingRate: _id }: {
               <Price
                 amount={cartItems?.shippingAmount}
                 className="text-right text-base text-black dark:text-white"
-                currencyCode={"USD"}
+                currencyCode={DEFAULT_CURRENCY}
               />
             ) : (
               <p className="text-right text-base">Calculated at Next Step</p>
@@ -118,7 +118,7 @@ export default function CheckoutCart({ cartItems, selectedShippingRate: _id }: {
             <Price
               amount={(cartItems as any)?.grandTotal || "0"}
               className="text-right font-outfit text-2xl font-normal text-black dark:text-white"
-              currencyCode={"USD"}
+              currencyCode={DEFAULT_CURRENCY}
             />
           </div>
         </div>

@@ -12,6 +12,8 @@ import {
   BAGISTO_SESSION,
   HIDDEN_PRODUCT_TAG,
   STOREFRONT_KEY,
+  DEFAULT_CURRENCY,
+  DEFAULT_LOCALE,
 } from "../constants";
 import { getServerSession } from "next-auth";
 import {
@@ -150,8 +152,8 @@ export async function bagistoFetchNoSession<T>({
       headers: {
         "Content-Type": "application/json",
         "X-STOREFRONT-KEY": STOREFRONT_KEY,
-        "x-locale": "en",
-        "x-currency": "USD",
+        "x-locale": DEFAULT_LOCALE,
+        "x-currency": DEFAULT_CURRENCY,
         ...headers,
       },
       body: JSON.stringify({

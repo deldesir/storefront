@@ -1,4 +1,4 @@
-import { DEFAULT_OPTION } from "@/utils/constants";
+import { DEFAULT_OPTION, DEFAULT_CURRENCY } from "@/utils/constants";
 import { useScrollTo } from "@/utils/hooks/useScrollTo";
 import { Price } from "@components/theme/ui/Price";
 import { Accordion, AccordionItem } from "@heroui/accordion";
@@ -60,7 +60,7 @@ export default function CartItemAccordion({
             <Price
               className=""
               amount={cartItems?.grandTotal || "0"}
-              currencyCode={"USD"}
+              currencyCode={DEFAULT_CURRENCY}
             />
           }
         >
@@ -109,7 +109,7 @@ export default function CartItemAccordion({
                         <Price
                           className="flex justify-end space-y-2 text-right text-sm"
                           amount={item?.node?.price}
-                          currencyCode={"USD"}
+                          currencyCode={DEFAULT_CURRENCY}
                         />
                       </div>
                     </div>
@@ -125,7 +125,7 @@ export default function CartItemAccordion({
                 <Price
                   className="text-right text-base text-black dark:text-white"
                   amount={cartItems?.subtotal || "0"}
-                  currencyCode={"USD"}
+                  currencyCode={DEFAULT_CURRENCY}
                 />
               </div>
               <div className="mb-3 flex items-center justify-between pb-1 pt-1">
@@ -136,7 +136,7 @@ export default function CartItemAccordion({
                   <Price
                     amount={cartItems?.shippingAmount || "0"}
                     className="text-right text-base text-black dark:text-white"
-                    currencyCode={"USD"}
+                    currencyCode={DEFAULT_CURRENCY}
                   />
                 ) : (
                   <p className="text-right text-base">
@@ -149,7 +149,7 @@ export default function CartItemAccordion({
                 <Price
                   className="text-right text-base text-black dark:text-white"
                   amount={cartItems?.grandTotal || "0"}
-                  currencyCode={"USD"}
+                  currencyCode={DEFAULT_CURRENCY}
                 />
               </div>
             </div>

@@ -1,7 +1,9 @@
+import { DEFAULT_CURRENCY } from "@/utils/constants";
+
 export const Price = ({
   amount,
   className,
-  currencyCode = "USD",
+  currencyCode = DEFAULT_CURRENCY,
   ...rest
 }: {
   amount: string;

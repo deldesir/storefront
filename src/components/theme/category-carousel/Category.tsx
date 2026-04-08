@@ -1,4 +1,4 @@
-import { NOT_IMAGE } from "@/utils/constants";
+import { NOT_IMAGE, DEFAULT_CURRENCY } from "@/utils/constants";
 import Link from "next/link";
 import { FC } from "react";
 import { GridTileImage } from "../ui/grid/Tile";
@@ -41,7 +41,7 @@ const Category: FC<{
                     title: product?.name || "",
                     page: "category",
                     amount: "0",
-                    currencyCode: "USD",
+                    currencyCode: DEFAULT_CURRENCY,
                   }}
                   src={product?.logoUrl || NOT_IMAGE}
                 />

@@ -4,6 +4,7 @@ import { FC } from "react";
 import Link from "next/link";
 import clsx from "clsx";
 import { GridTileImage } from "@/components/theme/ui/grid/Tile";
+import { DEFAULT_CURRENCY } from "@/utils/constants";
 
 interface ThreeItemGridProps {
     title: string;
@@ -65,7 +66,7 @@ function ThreeItemGridItem({ product, size, priority }: {
                         position: size === 'full' ? 'center' : 'bottom',
                         title: product.name,
                         amount: String(product.type === 'configurable' ? (product.minimumPrice || '0') : (product.price || '0')),
-                        currencyCode: 'USD',
+                        currencyCode: DEFAULT_CURRENCY,
                     }}
                 />
             </Link>
@@ -104,7 +105,7 @@ function MobileThreeItemGridItem({ product, size, priority }: {
                         position: size === 'full' ? 'center' : 'bottom',
                         title: product.name,
                         amount: String(product.type === 'configurable' ? (product.minimumPrice || '0') : (product.price || '0')),
-                        currencyCode: 'USD',
+                        currencyCode: DEFAULT_CURRENCY,
                     }}
                 />
             </Link>

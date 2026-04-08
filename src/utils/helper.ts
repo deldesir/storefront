@@ -2,7 +2,7 @@ import { ReadonlyURLSearchParams } from "next/navigation";
 import { Metadata } from "next";
 import { CartItem, FilterDataTypes } from "@/types/types";
 import { isArray } from "./type-guards";
-import { BASE_URL, baseUrl } from "./constants";
+import { BASE_URL, baseUrl, DEFAULT_CURRENCY, DEFAULT_LOCALE } from "./constants";
 import { ProductData } from "@components/catalog/type";
 import { CategoryNode } from "@/types/theme/category-tree";
 import { cachedGraphQLRequest } from "./hooks/useCache";
@@ -347,7 +347,7 @@ export function safeCurrencyCode(product: ProductData): string {
     return product.price.currencyCode;
   }
 
-  return "USD";
+  return DEFAULT_CURRENCY;
 }
 
 /**
@@ -422,7 +422,7 @@ export async function getFilterAttributes() {
     color: any;
     size: any;
     brand: any;
-  }>("static", GET_FILTER_ATTRIBUTES, { locale: "en" });
+  }>("static", GET_FILTER_ATTRIBUTES, { locale: DEFAULT_LOCALE });
 
   const attributes = [filterData?.color, filterData?.size, filterData?.brand];
 
