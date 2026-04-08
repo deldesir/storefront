@@ -8,7 +8,7 @@ export async function CategoriesMenu() {
    const data = await cachedGraphQLRequest<TreeCategoriesResponse>(
     "category",
     GET_TREE_CATEGORIES,
-    { parentId: 1 }
+    {}
   );
 
 

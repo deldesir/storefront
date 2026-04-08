@@ -1,6 +1,6 @@
 "use client";
 
-import { SessionProvider } from "next-auth/react";
+import { SessionProvider } from "./SessionProvider";
 import { SessionSync } from "./SessionSync";
 import { ReactNode } from "react";
 

@@ -34,7 +34,7 @@ export async function generateMetadata({
   const treeData = await cachedGraphQLRequest<TreeCategoriesResponse>(
     "category",
     GET_TREE_CATEGORIES,
-    { parentId: 1 }
+    { }
   );
 
   const categories = treeData?.treeCategories || [];
@@ -64,7 +64,7 @@ export default async function CategoryPage({
     cachedGraphQLRequest<TreeCategoriesResponse>(
       "category",
       GET_TREE_CATEGORIES,
-      { parentId: 1 }
+      {}
     ),
     getFilterAttributes(),
   ]);

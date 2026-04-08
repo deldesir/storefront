@@ -14,19 +14,19 @@ export const PAGE_CACHE_CONFIG: Record<string, PageCacheConfig> = {
   // Home page
   home: {
     tags: ["home-page"],
-    life: "hours",
+    life: "minutes",
   },
 
   // Product pages
   product: {
     tags: ["all-products"],
-    life: "hours",
+    life: "minutes",
   },
 
   // Category/Collection pages
   category: {
     tags: ["categories"],
-    life: "hours",
+    life: "minutes",
   },
 
   // Static content
@@ -38,7 +38,7 @@ export const PAGE_CACHE_CONFIG: Record<string, PageCacheConfig> = {
   // Search results
   search: {
     tags: ["search-results"],
-    life: "hours",
+    life: "minutes",
   },
 };
 
@@ -57,7 +57,7 @@ export function getPageCacheConfig(
 export function getProductCacheConfig(productId: string): PageCacheConfig {
   return {
     tags: ["products", `product-${productId}`],
-    life: "hours",
+    life: "minutes",
   };
 }
 
@@ -67,7 +67,7 @@ export function getProductCacheConfig(productId: string): PageCacheConfig {
 export function getCategoryCacheConfig(categoryId: string): PageCacheConfig {
   return {
     tags: ["categories", `category-${categoryId}`],
-    life: "hours",
+    life: "minutes",
   };
 }
 
