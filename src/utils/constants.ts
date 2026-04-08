@@ -246,6 +246,7 @@ export const GUEST_CART_ID = "guest_cart_id";
 export const IS_GUEST = "is_guest";
 export const DEFAULT_CURRENCY = process.env.NEXT_PUBLIC_DEFAULT_CURRENCY || "USD";
 export const DEFAULT_LOCALE = process.env.NEXT_PUBLIC_DEFAULT_LOCALE || "en";
+export const SITE_NAME = process.env.NEXT_PUBLIC_SITE_NAME || process.env.COMPANY_NAME || "Garantie Boutique";
 
 
 export const NEXTAUTH_TOKEN = "next-auth.session-token";

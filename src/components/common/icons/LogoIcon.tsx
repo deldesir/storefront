@@ -1,3 +1,5 @@
+import { SITE_NAME } from "@/utils/constants";
+
 export default function LogoIcon() {
   return (
     <>
@@ -33,7 +35,7 @@ export default function LogoIcon() {
           </svg>
         </div>
         <p className="text-sm font-semibold text-black dark:text-white">
-          Bagisto Store
+          {SITE_NAME}
         </p>
       </div>
     </>
