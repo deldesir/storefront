@@ -86,7 +86,7 @@ export default function CartItemAccordion({
                             className="h-full w-full object-cover"
                             width={64}
                             height={64}
-                            alt={item?.node?.baseImage || item?.product?.name}
+                            alt={item?.node?.name || item?.product?.name || "Product image"}
                             src={baseImage?.small_image_url || NOT_IMAGE}
                           />
                         </div>

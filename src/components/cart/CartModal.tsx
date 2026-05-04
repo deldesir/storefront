@@ -160,8 +160,9 @@ export default function CartModal({
                                     <div className="relative h-16 w-16 cursor-pointer overflow-hidden rounded-md border border-neutral-300 bg-neutral-300 dark:border-neutral-700 dark:bg-neutral-900 dark:hover:bg-neutral-800">
                                       <Image
                                         alt={
-                                          item?.node?.baseImage ||
-                                          item?.product?.name
+                                          item?.node?.name ||
+                                          item?.product?.name ||
+                                          "Product image"
                                         }
                                         className="h-full w-full object-cover"
                                         height={64}
@@ -360,8 +361,9 @@ export default function CartModal({
                                     <div className="relative h-16 w-16 cursor-pointer overflow-hidden rounded-md border border-neutral-300 bg-neutral-300 dark:border-neutral-700 dark:bg-neutral-900 dark:hover:bg-neutral-800">
                                       <Image
                                         alt={
-                                          item?.node?.baseImage ||
-                                          item?.product?.name
+                                          item?.node?.name ||
+                                          item?.product?.name ||
+                                          "Product image"
                                         }
                                         className="h-full w-full object-cover"
                                         height={64}
