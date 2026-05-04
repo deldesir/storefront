@@ -6,9 +6,12 @@ import { ReduxProvider } from "./ReduxProvider";
 import { ToastProvider } from "./ToastProvider";
 import { ApolloWrapper } from "./ApolloWrapper";
 
+import { SessionProvider } from "./SessionProvider";
+
 export function GlobalProviders({ children }: { children: ReactNode }) {
   return (
-    <ThemeProvider>
+    <SessionProvider>
+      <ThemeProvider>
       <ReduxProvider>
         <ToastProvider>
           <ApolloWrapper>
@@ -17,5 +20,6 @@ export function GlobalProviders({ children }: { children: ReactNode }) {
         </ToastProvider>
       </ReduxProvider>
     </ThemeProvider>
+    </SessionProvider>
   );
 }

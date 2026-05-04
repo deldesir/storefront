@@ -10,6 +10,7 @@ export const GET_HOME_CATEGORIES = gql`
         node {
           id
           position
+          status
           logoUrl
           translation {
             id

@@ -44,7 +44,15 @@ export const BAGISTO_SESSION = process.env.BAGISTO_SESSION ?? "bagisto_session";
 export const TOKEN = "token";
 export const BASE_URL = process.env.NEXT_PUBLIC_NEXT_AUTH_URL;
 export const baseUrl = process.env.NEXT_PUBLIC_BAGISTO_ENDPOINT;
-export const GRAPHQL_URL = `${(process.env.NEXT_PUBLIC_BAGISTO_ENDPOINT || '').replace(/\/$/, '')}${BAGISTO_GRAPHQL_API_ENDPOINT}`;
+export const GRAPHQL_URL = typeof window === "undefined" ? "http://127.0.0.1/live/graphql-backend" : `${(process.env.NEXT_PUBLIC_BAGISTO_ENDPOINT || "").replace(/\/$/, "")}${BAGISTO_GRAPHQL_API_ENDPOINT}`;
+// Public hostname extracted from NEXT_PUBLIC_BAGISTO_ENDPOINT for server-side Host header
+export const BAGISTO_PUBLIC_HOST = (() => {
+  try {
+    return new URL(process.env.NEXT_PUBLIC_BAGISTO_ENDPOINT || "").host;
+  } catch {
+    return "localhost";
+  }
+})();
 export const NEXT_AUTH_SECRET = process.env.NEXT_PUBLIC_NEXT_AUTH_SECRET;
 
 // Server-only: Use non-public env var, fallback to public for backwards compatibility
@@ -63,10 +71,10 @@ export const SORT = "sort";
 /**
  * Placeholder Images
  */
-export const SIGNUP_IMG = "/image/sign-in.webp";
-export const SIGNIN_IMG = "/image/login.webp";
-export const FORGET_PASSWORD_IMG = "/image/forget-password.webp";
-export const NOT_IMAGE = "/image/placeholder.webp";
+export const SIGNUP_IMG = `${baseUrl}/image/sign-in.webp`;
+export const SIGNIN_IMG = `${baseUrl}/image/login.webp`;
+export const FORGET_PASSWORD_IMG = `${baseUrl}/image/forget-password.webp`;
+export const NOT_IMAGE = `${baseUrl}/image/placeholder.webp`;
 
 export const variants = {
   hidden: { opacity: 0, y: 50 },

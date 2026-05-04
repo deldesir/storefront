@@ -78,8 +78,8 @@ export const authOptions: NextAuthOptions = {
   },
 
   pages: {
-    signIn: "/customer/login",
-    error: "/login",
+    signIn: (process.env.NEXT_PUBLIC_AUTH_BASEPATH || "") + "/customer/login",
+    error: (process.env.NEXT_PUBLIC_AUTH_BASEPATH || "") + "/customer/login",
   },
 
   secret: process.env.NEXT_PUBLIC_NEXT_AUTH_SECRET,

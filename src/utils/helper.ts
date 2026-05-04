@@ -347,7 +347,7 @@ export function safeCurrencyCode(product: ProductData): string {
     return product.price.currencyCode;
   }
 
-  return "USD";
+  return "HTG";
 }
 
 /**
@@ -379,8 +379,17 @@ export function findCategoryBySlug(
   for (const category of categories) {
     if (category.translation?.slug === slug) return category;
 
+    // Handle children as array (flat format)
     if (category.children && isArray(category.children)) {
       const found = findCategoryBySlug(category.children, slug);
+      if (found) return found;
+    }
+
+    // Handle children as connection (edges/node format from GraphQL)
+    const edges = (category.children as any)?.edges;
+    if (edges && isArray(edges)) {
+      const childNodes = edges.map((e: any) => e.node).filter(Boolean);
+      const found = findCategoryBySlug(childNodes, slug);
       if (found) return found;
     }
   }

@@ -165,11 +165,8 @@ export default function CartModal({
                                         }
                                         className="h-full w-full object-cover"
                                         height={64}
-                                        src={baseImage?.small_image_url || ""}
+                                        src={baseImage?.small_image_url || NOT_IMAGE}
                                         width={74}
-                                        onError={(e) =>
-                                          (e.currentTarget.src = NOT_IMAGE)
-                                        }
                                       />
                                     </div>
 
@@ -189,7 +186,7 @@ export default function CartModal({
                                     <Price
                                       amount={item?.node?.price}
                                       className="flex justify-end space-y-2 text-right font-outfit text-base font-medium"
-                                      currencyCode={"USD"}
+                                      currencyCode={"HTG"}
                                     />
                                     <div className="flex items-center gap-x-2">
                                       <DeleteItemButton item={item} />
@@ -225,7 +222,7 @@ export default function CartModal({
                             <Price
                               amount={(cartDetail as any)?.cart?.taxAmount}
                               className="text-right text-base font-medium text-black dark:text-white"
-                              currencyCode={"USD"}
+                              currencyCode={"HTG"}
                             />
                           </div>
                         )}
@@ -236,7 +233,7 @@ export default function CartModal({
                           <Price
                             amount={(cartDetail as any)?.cart?.grandTotal}
                             className="text-right text-base font-medium text-black dark:text-white"
-                            currencyCode={"USD"}
+                            currencyCode={"HTG"}
                           />
                         </div>
                       </div>
@@ -368,11 +365,8 @@ export default function CartModal({
                                         }
                                         className="h-full w-full object-cover"
                                         height={64}
-                                        src={baseImage?.small_image_url || ""}
+                                        src={baseImage?.small_image_url || NOT_IMAGE}
                                         width={74}
-                                        onError={(e) =>
-                                          (e.currentTarget.src = NOT_IMAGE)
-                                        }
                                       />
                                     </div>
                                     <div className="flex flex-1 flex-col text-base">
@@ -390,7 +384,7 @@ export default function CartModal({
                                     <Price
                                       amount={item?.node?.price}
                                       className="flex justify-end space-y-2 text-right font-outfit text-base font-medium"
-                                      currencyCode={"USD"}
+                                      currencyCode={"HTG"}
                                     />
                                     <div className="flex items-center gap-x-2">
                                       <DeleteItemButton item={item} />
@@ -426,7 +420,7 @@ export default function CartModal({
                             <Price
                               amount={(cartDetail as any)?.cart?.taxAmount}
                               className="text-right text-base font-medium text-black dark:text-white"
-                              currencyCode={"USD"}
+                              currencyCode={"HTG"}
                             />
                           </div>
                         )}
@@ -437,7 +431,7 @@ export default function CartModal({
                           <Price
                             amount={(cartDetail as any)?.cart?.grandTotal}
                             className="text-right text-base font-medium text-black dark:text-white"
-                            currencyCode={"USD"}
+                            currencyCode={"HTG"}
                           />
                         </div>
 

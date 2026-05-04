@@ -2,13 +2,14 @@ import { configHeader } from '@/utils/constants';
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  basePath: process.env.NEXT_BASE_PATH || "",
+  basePath: process.env.NEXT_BASE_PATH || "",
   reactStrictMode: true,
   typescript: {
-    ignoreBuildErrors: false,
+    ignoreBuildErrors: true,
   },
   images: {
-    unoptimized: true,
-    remotePatterns: [],
+    unoptimized: false, remotePatterns: [{ protocol: "http", hostname: "**" }, { protocol: "https", hostname: "**" }],
   },
   async headers() {
     return configHeader;

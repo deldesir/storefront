@@ -15,20 +15,27 @@ export async function CategoriesMenu() {
   const categories = data?.treeCategories || [];
 
   const filteredCategories = categories
-    .filter((cat: any) => cat.id !== "1")
+    .filter((cat: any) => {
+      // Only show active categories (status=1)
+      // Inactive ones are internal ERP groups (Raw Material, Services, etc.)
+      return String(cat.status) === "1";
+    })
     .map((cat: any) => {
       const translation = cat.translation;
       return {
         id: cat.id,
         name: translation?.name || "",
         slug: translation?.slug || "",
+        hasLogo: !!cat.logoPath,
       };
     })
-    .filter((item: any) => item.name && item.slug);
+    .filter((item: any) => item.name && item.slug)
+    // Prioritize categories with logos (they're the curated storefront ones)
+    .sort((a: any, b: any) => (b.hasLogo ? 1 : 0) - (a.hasLogo ? 1 : 0));
 
   const menuData = [
     { id: "all", name: "All", slug: "" },
-    ...filteredCategories.slice(0, 3),
+    ...filteredCategories.slice(0, 4),
   ];
 
   return (

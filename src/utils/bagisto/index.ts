@@ -120,9 +120,18 @@ export async function bagistoFetch<T>({
 
     const body = await result.json();
 
-    if (body.errors) throw body.errors[0];
+    // Rewrite internal 127.0.0.1 URLs to the public endpoint.
+    // PHP-FPM receives the raw request host (127.0.0.1) via fastcgi_pass,
+    // so Bagisto builds all image/asset URLs with http://127.0.0.1.
+    // Next.js Image blocks these as SSRF. This rewrites them in one pass.
+    const publicOrigin = (process.env.NEXT_PUBLIC_BAGISTO_ENDPOINT || "").replace(/\/$/, "");
+    const rewritten = typeof window === "undefined" && publicOrigin
+      ? JSON.parse(JSON.stringify(body).replaceAll("http:\\/\\/127.0.0.1\\/live", publicOrigin.replace(/\//g, "\\/")).replaceAll("http://127.0.0.1/live", publicOrigin))
+      : body;
 
-    return { status: result.status, body };
+    if (rewritten.errors) throw rewritten.errors[0];
+
+    return { status: result.status, body: rewritten };
   } catch (e) {
     throw e;
   }
@@ -151,7 +160,7 @@ export async function bagistoFetchNoSession<T>({
         "Content-Type": "application/json",
         "X-STOREFRONT-KEY": STOREFRONT_KEY,
         "x-locale": "en",
-        "x-currency": "USD",
+        "x-currency": process.env.NEXT_PUBLIC_DEFAULT_CURRENCY || "HTG",
         ...headers,
       },
       body: JSON.stringify({
@@ -167,13 +176,19 @@ export async function bagistoFetchNoSession<T>({
 
     const body = await result.json();
 
-    if (body.errors) {
-      throw body.errors[0];
+    // Rewrite internal 127.0.0.1 URLs (same as bagistoFetch)
+    const publicOrigin = (process.env.NEXT_PUBLIC_BAGISTO_ENDPOINT || "").replace(/\/$/, "");
+    const rewritten = typeof window === "undefined" && publicOrigin
+      ? JSON.parse(JSON.stringify(body).replaceAll("http:\\/\\/127.0.0.1\\/live", publicOrigin.replace(/\//g, "\\/")).replaceAll("http://127.0.0.1/live", publicOrigin))
+      : body;
+
+    if (rewritten.errors) {
+      throw rewritten.errors[0];
     }
 
     return {
       status: result.status,
-      body,
+      body: rewritten,
     };
   } catch (e) {
     throw { error: e, query };

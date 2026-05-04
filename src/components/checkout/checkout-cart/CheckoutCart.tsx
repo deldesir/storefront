@@ -46,9 +46,8 @@ export default function CheckoutCart({ cartItems, selectedShippingRate: _id }: {
                             alt={item?.node?.baseImage || item?.product?.name}
                             className="h-full w-full object-cover"
                             height={64}
-                            src={baseImage?.small_image_url || ""}
+                            src={baseImage?.small_image_url || NOT_IMAGE}
                             width={74}
-                            onError={(e) => (e.currentTarget.src = NOT_IMAGE)}
                           />
                         </div>
                         <div className="flex flex-1 flex-col text-base">
@@ -67,7 +66,7 @@ export default function CheckoutCart({ cartItems, selectedShippingRate: _id }: {
                             <Price
                               amount={item?.node?.price}
                               className="space-y-2 text-start font-outfit text-lg font-medium xl:text-right"
-                              currencyCode={"USD"}
+                              currencyCode={"HTG"}
                             />
                           </div>
                         </div>
@@ -76,7 +75,7 @@ export default function CheckoutCart({ cartItems, selectedShippingRate: _id }: {
                         <Price
                           amount={item?.node?.price}
                           className="space-y-2 text-start font-outfit text-lg font-medium xl:text-right"
-                          currencyCode={"USD"}
+                          currencyCode={"HTG"}
                         />
                       </div>
                     </div>
@@ -93,7 +92,7 @@ export default function CheckoutCart({ cartItems, selectedShippingRate: _id }: {
             <Price
               amount={cartItems?.subtotal || "0"}
               className="text-right text-base text-black dark:text-white"
-              currencyCode={"USD"}
+              currencyCode={"HTG"}
             />
           </div>
           <div className="mb-3 flex items-center justify-between pb-1 pt-1">
@@ -105,7 +104,7 @@ export default function CheckoutCart({ cartItems, selectedShippingRate: _id }: {
               <Price
                 amount={cartItems?.shippingAmount}
                 className="text-right text-base text-black dark:text-white"
-                currencyCode={"USD"}
+                currencyCode={"HTG"}
               />
             ) : (
               <p className="text-right text-base">Calculated at Next Step</p>
@@ -118,7 +117,7 @@ export default function CheckoutCart({ cartItems, selectedShippingRate: _id }: {
             <Price
               amount={(cartItems as any)?.grandTotal || "0"}
               className="text-right font-outfit text-2xl font-normal text-black dark:text-white"
-              currencyCode={"USD"}
+              currencyCode={"HTG"}
             />
           </div>
         </div>

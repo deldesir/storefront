@@ -3,7 +3,7 @@ import RenderThemeCustomization from "@components/home/RenderThemeCustomization"
 import { ThemeCustomizationResponse } from "@/types/theme/theme-customization";
 import { cachedGraphQLRequest } from "@/utils/hooks/useCache";
 
-export const revalidate = 3600;
+export const revalidate = 60;
 
 export default async function Home() {
   const data = await cachedGraphQLRequest<ThemeCustomizationResponse>(

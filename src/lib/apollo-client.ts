@@ -40,7 +40,7 @@ function createApolloClient() {
   const cache = new InMemoryCache();
 
   const httpLink = new HttpLink({
-    uri: ssrMode ? GRAPHQL_URL : "/api/graphql",
+    uri: ssrMode ? GRAPHQL_URL : `${process.env.NEXT_PUBLIC_AUTH_BASEPATH || ""}/api/graphql`,
     credentials: "include",
   });
 

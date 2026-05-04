@@ -22,7 +22,8 @@ export async function fetchHandler({
       ...headers,
     };
 
-    const response = await fetch(`/api/${url}`, {
+    const basePath = process.env.NEXT_PUBLIC_AUTH_BASEPATH || "";
+    const response = await fetch(`${basePath}/api/${url}`, {
       method,
       headers: defaultHeaders,
       body: body ? JSON.stringify(body) : undefined,

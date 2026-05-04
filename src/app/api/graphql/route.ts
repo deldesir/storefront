@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import { bagistoFetch } from "@/utils/bagisto";
-import { isBagistoError } from "@/utils/type-guards";
 import { getAuthToken } from "@/utils/helper";
 import {
     CREATE_ADD_PRODUCT_IN_CART,
@@ -112,23 +111,30 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({
             data: response.body.data,
         });
-    } catch (error) {
-        if (isBagistoError(error)) {
+    } catch (error: any) {
+        // If the error object has a message and extensions, it's likely the GraphQL error thrown by bagistoFetch
+        if (error && typeof error === 'object' && error.message) {
             return NextResponse.json(
                 {
                     data: null,
-                    error: error.cause ?? error,
+                    errors: [error],
                 },
                 { status: 200 }
             );
         }
 
+        // Generic fallback for network or unknown errors
         return NextResponse.json(
             {
-                message: "Network error",
-                error: error instanceof Error ? error.message : error,
+                data: null,
+                errors: [
+                    {
+                        message: error instanceof Error ? error.message : "Unknown Error",
+                        extensions: { originalError: error }
+                    }
+                ]
             },
-            { status: 500 }
+            { status: 200 }
         );
     }
 }

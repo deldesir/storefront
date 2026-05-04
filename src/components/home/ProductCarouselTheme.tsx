@@ -30,7 +30,7 @@ const Theme = ({ title, description, products }: ProductsSectionProps) => {
             return (
               <ProductCard
                 key={item.id ?? index}
-                currency="USD"
+                currency="HTG"
                 imageUrl={imageUrl || ""}
                 price={String(ProductPrice)}
                 product={{

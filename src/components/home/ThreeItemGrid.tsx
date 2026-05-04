@@ -65,7 +65,7 @@ function ThreeItemGridItem({ product, size, priority }: {
                         position: size === 'full' ? 'center' : 'bottom',
                         title: product.name,
                         amount: String(product.type === 'configurable' ? (product.minimumPrice || '0') : (product.price || '0')),
-                        currencyCode: 'USD',
+                        currencyCode: 'HTG',
                     }}
                 />
             </Link>
@@ -104,7 +104,7 @@ function MobileThreeItemGridItem({ product, size, priority }: {
                         position: size === 'full' ? 'center' : 'bottom',
                         title: product.name,
                         amount: String(product.type === 'configurable' ? (product.minimumPrice || '0') : (product.price || '0')),
-                        currencyCode: 'USD',
+                        currencyCode: 'HTG',
                     }}
                 />
             </Link>

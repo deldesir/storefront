@@ -47,7 +47,7 @@ const MobileCategoryItem: FC<MobileCategoryItemProps> = ({
             title: category.translation.name || "",
             page: "category",
             amount: "0",
-            currencyCode: "USD",
+            currencyCode: "HTG",
           }}
           priority={priority}
           sizes={
@@ -82,9 +82,14 @@ const CategoryCarousel: FC<CategoryCarouselProps> = async ({
       data?.categories?.edges?.map((edge) => edge.node) || [];
 
     const topCategories = categories
-      .filter((category) => category.id !== "1")
+      .filter((category) => {
+        // Skip root category
+        if (category.id === "1" || category.id?.endsWith("/1")) return false;
+        // Only show active categories with images
+        return category.status === "1" && category.logoUrl;
+      })
       .sort((a, b) => (a.position || 0) - (b.position || 0))
-      .slice(1, 4);
+      .slice(0, 3);
 
     if (!topCategories.length) return null;
 
@@ -144,7 +149,7 @@ const CategoryCarousel: FC<CategoryCarouselProps> = async ({
                       title: category.translation.name || "",
                       page: "category",
                       amount: "0",
-                      currencyCode: "USD",
+                      currencyCode: "HTG",
                     }}
                     src={category.logoUrl || NOT_IMAGE}
                   />
