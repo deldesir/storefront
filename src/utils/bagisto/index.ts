@@ -21,6 +21,7 @@ import {
 } from "@/graphql/customer/mutations";
 import { DocumentNode } from "graphql";
 import { GRAPHQL_URL } from "@/utils/constants";
+import { rewriteInternalUrls } from "@/utils/rewriteUrls";
 import {
   GET_FOOTER,
   GET_THEME_CUSTOMIZATION,
@@ -120,14 +121,7 @@ export async function bagistoFetch<T>({
 
     const body = await result.json();
 
-    // Rewrite internal 127.0.0.1 URLs to the public endpoint.
-    // PHP-FPM receives the raw request host (127.0.0.1) via fastcgi_pass,
-    // so Bagisto builds all image/asset URLs with http://127.0.0.1.
-    // Next.js Image blocks these as SSRF. This rewrites them in one pass.
-    const publicOrigin = (process.env.NEXT_PUBLIC_BAGISTO_ENDPOINT || "").replace(/\/$/, "");
-    const rewritten = typeof window === "undefined" && publicOrigin
-      ? JSON.parse(JSON.stringify(body).replaceAll("http:\\/\\/127.0.0.1\\/live", publicOrigin.replace(/\//g, "\\/")).replaceAll("http://127.0.0.1/live", publicOrigin))
-      : body;
+    const rewritten = rewriteInternalUrls(body);
 
     if (rewritten.errors) throw rewritten.errors[0];
 
@@ -176,11 +170,7 @@ export async function bagistoFetchNoSession<T>({
 
     const body = await result.json();
 
-    // Rewrite internal 127.0.0.1 URLs (same as bagistoFetch)
-    const publicOrigin = (process.env.NEXT_PUBLIC_BAGISTO_ENDPOINT || "").replace(/\/$/, "");
-    const rewritten = typeof window === "undefined" && publicOrigin
-      ? JSON.parse(JSON.stringify(body).replaceAll("http:\\/\\/127.0.0.1\\/live", publicOrigin.replace(/\//g, "\\/")).replaceAll("http://127.0.0.1/live", publicOrigin))
-      : body;
+    const rewritten = rewriteInternalUrls(body);
 
     if (rewritten.errors) {
       throw rewritten.errors[0];

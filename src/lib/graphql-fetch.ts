@@ -5,22 +5,9 @@ import {
   type OperationVariables,
 } from "@apollo/client";
 import makeClient from "./apollo-client";
+import { rewriteInternalUrls } from "@/utils/rewriteUrls";
 
-/**
- * Rewrite internal 127.0.0.1 URLs from PHP-FPM responses to the public endpoint.
- * Bagisto builds URLs using the request host, which is 127.0.0.1 when called
- * server-side via fastcgi_pass. Next.js Image blocks these as SSRF.
- */
-function rewriteInternalUrls<T>(data: T): T {
-  if (typeof window !== "undefined") return data; // client-side: no rewriting needed
-  const publicOrigin = (process.env.NEXT_PUBLIC_BAGISTO_ENDPOINT || "").replace(/\/$/, "");
-  if (!publicOrigin) return data;
-  const json = JSON.stringify(data);
-  const rewritten = json
-    .replaceAll("http:\\/\\/127.0.0.1\\/live", publicOrigin.replace(/\//g, "\\/"))
-    .replaceAll("http://127.0.0.1/live", publicOrigin);
-  return JSON.parse(rewritten);
-}
+
 
 
 
