@@ -8,8 +8,11 @@ import { CartAndUserActions } from "./CartAndUserActions";
 import { NavigationSkeleton } from "./NavigationSkeleton";
 import { ActionsSkeleton } from "./ActionsSkeleton";
 import { NavbarErrorBoundary } from "@/components/error/ErrorBoundary";
+import { getChannelBranding } from "@/utils/bagisto";
 
-export default function Navbar() {
+export default async function Navbar() {
+  const branding = await getChannelBranding();
+
   return (
     <NavbarErrorBoundary>
       <header className="sticky top-0 z-10">
@@ -22,7 +25,7 @@ export default function Navbar() {
                 href="/"
                 aria-label="Go to homepage"
               >
-                <LogoIcon />
+                <LogoIcon branding={branding} />
               </Link>
               
               {/* 2. STATIC HOLE: Categories (Suspended) */}

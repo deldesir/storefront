@@ -10,6 +10,7 @@ import Subscribe from "./Subscribe";
 import FooterMenu from "./FooterMenu";
 import ServiceContent from "./ServiceContent";
 import { ThemeCustomizationTranslationEdge } from "@/types/theme/theme-customization";
+import { getChannelBranding } from "@/utils/bagisto";
 const { COMPANY_NAME, SITE_NAME } = process.env;
 
 export default async function Footer() {
@@ -18,7 +19,8 @@ export default async function Footer() {
   const skeleton =
     "w-full h-6 animate-pulse rounded bg-neutral-200 dark:bg-neutral-700";
   const menu = await getThemeCustomization();
-  const copyrightName = COMPANY_NAME || SITE_NAME || "";
+  const branding = await getChannelBranding();
+  const copyrightName = branding.name || COMPANY_NAME || SITE_NAME || "";
   const services =
     menu?.services_content?.themeCustomizations?.edges?.[0]?.node;
 
@@ -41,13 +43,13 @@ export default async function Footer() {
               aria-label="Go to homepage"
               title="Go to homepage"
             >
-              <LogoIcon />
+              <LogoIcon branding={branding} />
               <span className="sr-only">Go to homepage</span>
             </Link>
             <div className="flex gap-[14px]">
               <Link
                 href={"#"}
-                aria-label="Visit Bagisto Store on Facebook"
+                aria-label={`Visit ${copyrightName} on Facebook`}
                 title="Facebook"
                 target="_blank"
                 className="cursor-pointer"
@@ -57,7 +59,7 @@ export default async function Footer() {
               </Link>
               <Link
                 href={"#"}
-                aria-label="Visit Bagisto Store on Instagram"
+                aria-label={`Visit ${copyrightName} on Instagram`}
                 title="Instagram"
                 target="_blank"
                 className="cursor-pointer"
@@ -67,7 +69,7 @@ export default async function Footer() {
               </Link>
               <Link
                 href={"#"}
-                aria-label="Visit Bagisto Store on Twitter"
+                aria-label={`Visit ${copyrightName} on Twitter`}
                 title="Twitter"
                 target="_blank"
                 className="cursor-pointer"

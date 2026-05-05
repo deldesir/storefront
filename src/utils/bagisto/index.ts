@@ -370,6 +370,60 @@ export async function getThemeCustomization(): Promise<ThemeCustomizationResult>
   };
 }
 
+/**
+ * Fetch channel branding (store name + logo) from Bagisto admin panel.
+ * Configured at: /live/admin/configuration/general/design
+ * Falls back to env vars if the channel has no logo/name set.
+ */
+export interface ChannelBranding {
+  name: string;
+  logoUrl: string | null;
+  faviconUrl: string | null;
+}
+
+interface ChannelBrandingResponse {
+  channels: {
+    edges: Array<{
+      node: {
+        code: string;
+        logoUrl: string | null;
+        faviconUrl: string | null;
+        translation: {
+          name: string;
+          homeSeo: Record<string, string> | null;
+        };
+      };
+    }>;
+  };
+}
+
+export async function getChannelBranding(): Promise<ChannelBranding> {
+  try {
+    const res = await cachedGraphQLRequest<ChannelBrandingResponse>(
+      "static",
+      (await import("@/graphql/channel/queries/GetChannelBranding")).GET_CHANNEL_BRANDING,
+      {}
+    );
+
+    const channel = res?.channels?.edges?.[0]?.node;
+    if (channel) {
+      return {
+        name: channel.translation?.name || process.env.NEXT_PUBLIC_SITE_NAME || "Store",
+        logoUrl: channel.logoUrl || process.env.NEXT_PUBLIC_LOGO_URL || null,
+        faviconUrl: channel.faviconUrl || null,
+      };
+    }
+  } catch (err) {
+    console.error("ChannelBranding Error:", err);
+  }
+
+  return {
+    name: process.env.NEXT_PUBLIC_SITE_NAME || "Store",
+    logoUrl: process.env.NEXT_PUBLIC_LOGO_URL || null,
+    faviconUrl: null,
+  };
+}
+
 export async function revalidate(req: NextRequest): Promise<NextResponse> {
   const collectionWebhooks = [
     "collections/create",
