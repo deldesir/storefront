@@ -1,27 +1,30 @@
 
+const SITE_NAME = process.env.NEXT_PUBLIC_SITE_NAME || "My Store";
+
 export const staticSeo = {
   default: {
-    title: "Bagisto Headless",
-    description: "Headless eCommerce with Bagisto",
+    title: `${SITE_NAME} | Boutique en ligne`,
+    description: `${SITE_NAME} — votre boutique en ligne.`,
     image: "/Logo.webp",
     canonical: "/",
   },
-  register : {
-    title: "Register",
-    description: "Register to Bagisto Headless",
+  register: {
+    title: `Créer un compte | ${SITE_NAME}`,
+    description: `Créez votre compte ${SITE_NAME} pour profiter de nos offres exclusives.`,
     image: "/Logo.webp",
     canonical: "/customer/register",
   },
   login: {
-    title: "Login",
-    description: "Login to Bagisto Headless",
+    title: `Connexion | ${SITE_NAME}`,
+    description: `Connectez-vous à votre compte ${SITE_NAME}.`,
     image: "/Logo.webp",
     canonical: "/customer/login",
   },
-  forget:{
-    title: "Forget Password",
-  description: "Recover your account by resetting your password.",
-  image: "/Logo.webp",
-  canonical: "/customer/forget-password",
-  }
+  forget: {
+    title: `Mot de passe oublié | ${SITE_NAME}`,
+    description: `Récupérez l'accès à votre compte ${SITE_NAME} en réinitialisant votre mot de passe.`,
+    image: "/Logo.webp",
+    canonical: "/customer/forget-password",
+  },
 };
+

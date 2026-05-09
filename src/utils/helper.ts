@@ -260,7 +260,7 @@ export async function generateMetadataForPage(
       title,
       description,
       url: canonicalUrl,
-      siteName: "Your Store Name",
+      siteName: process.env.NEXT_PUBLIC_SITE_NAME || "My Store",
       type: "website",
       images: [
         {
